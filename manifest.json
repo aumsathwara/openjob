@@ -1,0 +1,52 @@
+{
+    "name": "Job Description to Markdown Exporter",
+    "description": "Extract job descriptions from active web pages and save them as markdown files.",
+    "version": "1.0",
+    "manifest_version": 3,
+    "permissions": [
+        "activeTab",
+        "scripting",
+        "downloads",
+        "tabs",
+        "storage",
+        "cookies",
+        "offscreenDocuments"
+    ],
+    "host_permissions": [
+        "http://127.0.0.1:8000/*",
+        "https://*.overleaf.com/*",
+        "https://*.greenhouse.io/*",
+        "https://boards.greenhouse.io/*",
+        "https://job-boards.greenhouse.io/*",
+        "https://jobs.lever.co/*",
+        "https://*.myworkdayjobs.com/*",
+        "https://jobs.ashbyhq.com/*"
+    ],
+    "optional_host_permissions": [
+        "<all_urls>"
+    ],
+    "options_ui": {
+        "page": "onboarding/onboarding.html",
+        "open_in_tab": true
+    },
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://*.greenhouse.io/*",
+                "https://boards.greenhouse.io/*",
+                "https://job-boards.greenhouse.io/*",
+                "https://jobs.lever.co/*",
+                "https://*.myworkdayjobs.com/*",
+                "https://jobs.ashbyhq.com/*"
+            ],
+            "js": ["content/autofill.js"],
+            "run_at": "document_idle"
+        }
+    ],
+    "action": {
+        "default_popup": "popup/popup.html"
+    }
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Job Tracker AI — Profile Setup</title>
+  <link rel="stylesheet" href="onboarding.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1>Set Up Your Profile</h1>
+        <p class="subtitle">Everything stays on your machine — stored in your local ChromaDB and used to tailor resumes and answer application questions.</p>
+      </div>
+      <span id="server-status" class="server-badge">Checking server...</span>
+    </div>
+
+    <div class="card">
+      <h3>1. Personal &amp; Contact Info</h3>
+      <p class="hint">Used verbatim for autofill fields (name, email, phone, links).</p>
+      <div class="form-grid">
+        <div class="field"><label for="f-name">Full Name</label><input id="f-name" type="text" placeholder="Jane Doe"></div>
+        <div class="field"><label for="f-email">Email</label><input id="f-email" type="email" placeholder="jane@example.com"></div>
+        <div class="field"><label for="f-phone">Phone</label><input id="f-phone" type="tel" placeholder="+1 555 123 4567"></div>
+        <div class="field"><label for="f-location">Location</label><input id="f-location" type="text" placeholder="City, State"></div>
+        <div class="field"><label for="f-linkedin">LinkedIn</label><input id="f-linkedin" type="url" placeholder="linkedin.com/in/janedoe"></div>
+        <div class="field"><label for="f-github">GitHub</label><input id="f-github" type="url" placeholder="github.com/janedoe"></div>
+        <div class="field full-width"><label for="f-website">Portfolio / Website</label><input id="f-website" type="url" placeholder="janedoe.dev"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>2. Master Resume Upload</h3>
+      <p class="hint">Upload your LaTeX resume (.tex preferred) plus any supporting docs (.pdf/.txt/.md). Parsed into searchable chunks locally.</p>
+      <div id="file-drop" class="file-drop">Click or drag files here<br><small>.tex, .pdf, .txt, .md</small></div>
+      <input id="file-input" type="file" multiple accept=".tex,.pdf,.txt,.md,.rtf" style="display:none">
+      <ul id="file-list" class="file-list"></ul>
+    </div>
+
+    <div class="card">
+      <h3>3. Projects &amp; Experience Details</h3>
+      <p class="hint">Add context beyond your resume — details you'd mention in interviews and application questions.</p>
+      <div id="entries-container"></div>
+      <button id="add-entry-btn" class="btn-add">+ Add Entry</button>
+    </div>
+
+    <div class="card">
+      <h3>4. Overleaf Integration</h3>
+      <p class="hint">Log into <a href="https://www.overleaf.com" target="_blank">overleaf.com</a> in this browser, then verify the session below. Your session cookie is read per-request and never stored.</p>
+      <button id="overleaf-check-btn" class="btn btn-secondary" style="width:auto;">Check Overleaf Session</button>
+      <div id="overleaf-target-wrap" style="display:none; margin-top:12px;">
+        <div class="field">
+          <label for="f-overleaf-project">Target Project (tailored resumes overwrite this project's main.tex)</label>
+          <select id="f-overleaf-project"><option value="">Select a project...</option></select>
+          <input id="f-overleaf-project-manual" type="text" placeholder="...or paste a project URL / ID" style="margin-top:6px;">
+        </div>
+        <button id="overleaf-save-project-btn" class="btn btn-secondary" style="width:auto; margin-top:8px;">Save Target Project</button>
+        <span id="overleaf-saved-note" style="font-size:12px; color:#15803d; font-weight:600; display:none;">Saved &#10003;</span>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button id="save-all-btn" class="btn">Save Profile</button>
+      <button id="reload-btn" class="btn btn-secondary">Reload Saved Data</button>
+    </div>
+
+    <div id="status"></div>
+
+    <div class="card">
+      <h3>Saved Profile Entries (<span id="saved-count">0</span>)</h3>
+      <p class="hint">These power the AI when tailoring resumes and answering employer questions.</p>
+      <ul id="saved-entries" class="saved-entries"></ul>
+    </div>
+  </div>
+
+  <script src="onboarding.js"></script>
+</body>
+</html>
